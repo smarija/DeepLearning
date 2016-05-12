@@ -1,7 +1,7 @@
-function [ featuresTr, featuresTe ] = select_best_pairs( featuresTr, featuresTe )
+function [ featuresTr, featuresTe ] = select_best_pairs( featuresTr, featuresTe)
 %UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-
+%   Detailed explanation goes her
+nb_elem=1000;
 support=sum(featuresTr,1)/size(featuresTr,1);
 tmp=featuresTr;
 %choose the one with the highest support
@@ -15,7 +15,7 @@ tmp(x,:)=[];
 [prev_tick, interval_time,start  ] = timer_start(60 );
 K=1; %counter for features
 i=0; %counter
-while(~isempty(tmp) && ~all(support<=0) && K<100)
+while(~isempty(tmp) && ~all(support<=0) && K<=nb_elem)
     [~,y,~]=find(support==max(support));
     if(sum(tmp(:,y(1)))>0)
         support(y(1))=-support(y(1));

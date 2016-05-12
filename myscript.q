@@ -13,7 +13,7 @@ mkdir -p $RUNDIR
  
 DATADIR=$SCRATCH/Datasets
 cd $RUNDIR
-stata -b do $DATADIR/data_0706.do
+matlab -b do $DATADIR/data_0706.do
  
 # leave a blank line at the end
 
