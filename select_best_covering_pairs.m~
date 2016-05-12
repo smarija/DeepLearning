@@ -1,0 +1,21 @@
+function [ featuresTr, featuresTe ] = select_best_covering_pairs( featuresTr, featuresTe)
+%UNTITLED3 Summary of this function goes here
+%   Detailed explanation goes her
+nb_elem=1000;
+tmp=featuresTr;
+selected_features=[];
+cover=sum(featuresTr,1);
+[~,ind]=sort(cover,'descend');
+K=0;
+while(K<=nb_elem)
+    selected_features=[selected_features,ind(1)];
+    tmp(logical(tmp(:,ind(1))),:)=[];
+    cover=sum(tmp,1);
+    [~,ind]=sort(cover,'descend');   
+    K=K+1;
+end
+featuresTr=featuresTr(:,selected_features);
+featuresTe=featuresTe(:,selected_features);
+
+end
+
