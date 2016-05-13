@@ -1,4 +1,4 @@
-cd('')
+cd('/home/ms10007/DeepLearning')
 make
 load('/scratch/ms10007/Datasets/matrix.mat')
 load('/scratch/ms10007/Datasets/label.mat')
