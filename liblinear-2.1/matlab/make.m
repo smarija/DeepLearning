@@ -9,12 +9,17 @@ try
 		mex -I.. predict.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
 	% This part is for MATLAB
 	% Add -largeArrayDims on 64-bit machines of MATLAB
-	else
-		mex CFLAGS="\$CFLAGS -std=c99" -largeArrayDims libsvmread.c
-		mex CFLAGS="\$CFLAGS -std=c99" -largeArrayDims libsvmwrite.c
-		mex CFLAGS="\$CFLAGS -std=c99" -I.. -largeArrayDims train.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
-		mex CFLAGS="\$CFLAGS -std=c99" -I.. -largeArrayDims predict.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
+    else
+        mex CFLAGS= -largeArrayDims libsvmread.c
+		mex CFLAGS= -largeArrayDims libsvmwrite.c
+		mex CFLAGS= -I.. -largeArrayDims train.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
+		mex CFLAGS= -I.. -largeArrayDims predict.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
 	end
+% 		mex CFLAGS="\$CFLAGS -std=c99" -largeArrayDims libsvmread.c
+% 		mex CFLAGS="\$CFLAGS -std=c99" -largeArrayDims libsvmwrite.c
+% 		mex CFLAGS="\$CFLAGS -std=c99" -I.. -largeArrayDims train.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
+% 		mex CFLAGS="\$CFLAGS -std=c99" -I.. -largeArrayDims predict.c linear_model_matlab.c ../linear.cpp ../tron.cpp ../blas/daxpy.c ../blas/ddot.c ../blas/dnrm2.c ../blas/dscal.c
+% 	end
 catch err
 	fprintf('Error: %s failed (line %d)\n', err.stack(1).file, err.stack(1).line);
 	disp(err.message);
