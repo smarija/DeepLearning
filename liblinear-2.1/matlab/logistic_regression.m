@@ -45,8 +45,8 @@ auc_te=[];
                     end                   
                 end
                 param=strcat({'-s 0  -c '},{num2str(c)});%-e 0.001
-                model = train_svm(Ytr, Xtr, char(param)); %
-                [predicted_label, accuracy, prob_estimates] = predict_svm(Yval, Xval, model);
+                model = train(Ytr, Xtr, char(param)); %              
+                [predicted_label, accuracy, prob_estimates] = predict(Yval, Xval, model);
                 [~,~,~,auc_tmp] = perfcurve(Yval,prob_estimates,model.Label(1));  
                 auc_val=[auc_val,auc_tmp];
              end
@@ -66,8 +66,8 @@ auc_te=[];
         [~,y,~]=find(auc_best_val==max(auc_best_val));
         c= c_opt(y(1));%best performing c
         param=strcat({'-s 0  -c '},{num2str(c)});
-        model = train_svm(Yind, Xind, char(param)); %-e 0.001
-        [predicted_label, accuracy, prob_estimates] = predict_svm(Yte, Xte, model);
+        model = train(Yind, Xind, char(param)); %-e 0.001
+        [predicted_label, accuracy, prob_estimates] = predict(Yte, Xte, model);
         [~,~,~,auc_tmp1] = perfcurve(Yte,prob_estimates,model.Label(1));
         auc_te=[auc_te,auc_tmp1];    
     end
