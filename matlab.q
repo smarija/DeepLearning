@@ -9,6 +9,6 @@
 #PBS -m abe
 
 cd /home/ms10007/DeepLearning/
-module load matlab/2015b
+/share/apps/matlab/R2009b/bin/matlab/2015b/bin/matlab
 matlab < untitled4.m 
 
