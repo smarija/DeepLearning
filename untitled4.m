@@ -1,5 +1,4 @@
-% mex -setup
-% % make
+make
 load('/scratch/ms10007/Datasets/matrix.mat')
 load('/scratch/ms10007/Datasets/label.mat')
 [auc1]=logistic_regression(matrix,label,0);
