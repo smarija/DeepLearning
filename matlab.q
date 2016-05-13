@@ -8,7 +8,7 @@
 #PBS -M ms10007@nyu.edu
 #PBS -m abe
 
-cd /scratch/ms10007/matlab-workdir
-module load matlab/2014a
-matlab < $SCRATCH/Datasets 
+cd /home/ms10007/DeepLearning/
+module load matlab/2015b
+matlab <  >
 
