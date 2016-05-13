@@ -145,13 +145,7 @@ int parse_command_line(int nrhs, const mxArray *prhs[], char *model_file_name)
 	char cmd[CMD_LEN];
 	char *argv[CMD_LEN/2];
 	void (*print_func)(const char *) = print_string_matlab;	// default printing to matlab display
- 
-    
-    
-   // for(index = 0; index < argc; index++) {
-    //mexPrintf("The %d is %s\n",index,argv[index]);
-   // }
-    
+
 	// default values
 	param.solver_type = L2R_L2LOSS_SVC_DUAL;
 	param.C = 1;
@@ -167,6 +161,7 @@ int parse_command_line(int nrhs, const mxArray *prhs[], char *model_file_name)
 	flag_solver_specified = 0;
 	flag_find_C = 0;
 	bias = -1;
+
 
 	if(nrhs <= 1)
 		return 1;
@@ -199,12 +194,10 @@ int parse_command_line(int nrhs, const mxArray *prhs[], char *model_file_name)
 			case 's':
 				param.solver_type = atoi(argv[i]);
 				flag_solver_specified = 1;
-                mexPrintf("MARIJA: Solver Changed");
 				break;
 			case 'c':
 				param.C = atof(argv[i]);
 				flag_C_specified = 1;
-                mexPrintf("MARIJA: C parameter Changed");
 				break;
 			case 'p':
 				param.p = atof(argv[i]);
@@ -408,8 +401,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
 	if(nrhs > 1 && nrhs < 5)
 	{
 		int err=0;
-        mexPrintf("MARIJA: Transformation");
-        mexPrintf("Cparam %f \n",param.C);
 
 		if(!mxIsDouble(prhs[0]) || !mxIsDouble(prhs[1]))
 		{

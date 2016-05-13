@@ -1,3 +1,4 @@
+cd('')
 make
 load('/scratch/ms10007/Datasets/matrix.mat')
 load('/scratch/ms10007/Datasets/label.mat')
