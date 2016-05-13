@@ -10,5 +10,5 @@
 
 cd /home/ms10007/DeepLearning/
 module load matlab/2015b
-matlab <  >
+matlab < untitled4.m 
 
