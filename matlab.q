@@ -6,9 +6,7 @@
 #PBS -l walltime=01:00:00
 #PBS -l mem=20GB
 #PBS -M ms10007@nyu.edu
-#PBS -m abe
+#PBS -m e
 
 cd /home/ms10007/DeepLearning/
-module load /share/apps/matlab/2015b/bin/matlab
-matlab < untitled4.m 
-
+/share/apps/matlab/2015b/bin/matlab < untitled4.m
