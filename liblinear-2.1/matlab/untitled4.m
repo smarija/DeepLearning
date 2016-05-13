@@ -1,4 +1,4 @@
-cd('/home/ms10007/DeepLearning')
+cd('/home/ms10007/DeepLearning/liblinear-2.1/matlab')
 make
 load('/scratch/ms10007/Datasets/matrix.mat')
 load('/scratch/ms10007/Datasets/label.mat')
