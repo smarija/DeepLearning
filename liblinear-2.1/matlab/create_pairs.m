@@ -1,4 +1,4 @@
-function [ featuresTr,featuresTe,nb_features ] = create_pairs( Xtr,Xte )
+function [ featuresTr,featuresTe,coverage, nb_features ] = create_pairs( Xtr,Xte )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 cutoff=size(Xtr,1);
@@ -10,5 +10,7 @@ list=triu(Xtr'*Xtr,1);
 features=matrix(:,x).*matrix(:,y);
 featuresTr=features(1:cutoff,:);
 featuresTe=features(cutoff+1:end,:);
+coverage=sum(logical(sum(featuresTr,2)))/size(featuresTr,1);
+nb_features=size(featuresTr,2);
 end
 

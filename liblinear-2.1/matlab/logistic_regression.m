@@ -1,4 +1,4 @@
-function [ auc,coverage,nb_feat ] = logistic_regression( X,Y , mode,K )
+function [ auc_te,cov,nb_f ] = logistic_regression( X,Y , mode,K )
 
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
@@ -40,7 +40,7 @@ auc_te=[];
                     Xval=[Xval,featuresVal];
                 elseif (mode==2) %select the best pairs
                     [featuresTr,featuresVal]=create_pairs_no_ones(Xtr,Xval);
-                    [featuresTr,featuresVal,coverage,nb_feat]=select_best_covering_pairs(featuresTr,featuresVal,K);
+                    [featuresTr,featuresVal]=select_best_covering_pairs(featuresTr,featuresVal,K);
                     Xtr=[Xtr,featuresTr];
                     Xval=[Xval,featuresVal];                  
                 end                   
@@ -53,15 +53,18 @@ auc_te=[];
              auc_best_val(k)=sum(auc_val)/3;      
         end   
         if (mode==1)
-            [featuresInd,featuresTe]=create_pairs(Xind,Xte);
+            [featuresInd,featuresTe,coverage,nb_feat]=create_pairs(Xind,Xte);
             Xind=[Xind,featuresInd];
             Xte=[Xte,featuresTe];
+            nb_f=[nb_f,nb_feat];
+            cov=[cov,coverage];
         elseif (mode==2) %select the best pairs
-            [featuresInd,featuresTe]=create_pairs_no_ones(Xind,Xte);
+            [featuresInd,featuresTe,coverage,nb_feat]=create_pairs_no_ones(Xind,Xte);
             [featuresInd,featuresTe,coverage,nb_feat]=select_best_covering_pairs(featuresInd,featuresTe,K);
             Xind=[Xind,featuresInd];
             Xte=[Xte,featuresTe]; 
             nb_f=[nb_f,nb_feat];
+            cov=[cov,coverage];
         end                   
         [~,y,~]=find(auc_best_val==max(auc_best_val));
         c= c_opt(y(1));%best performing c
@@ -71,8 +74,8 @@ auc_te=[];
         [~,~,~,auc_tmp1] = perfcurve(Yte,prob_estimates,model.Label(1));
         auc_te=[auc_te,auc_tmp1];    
     end
-    auc=sum(auc_te)/10;
-    nb_f=nb_f/10;
+    auc=sum(auc_te)/10
+    
 end
 
 
