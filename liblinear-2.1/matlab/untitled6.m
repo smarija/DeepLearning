@@ -1,5 +1,5 @@
 cd('/home/ms10007/DeepLearning/liblinear-2.1/matlab')
-datasets={'MovieLens100k','PAKDD','NorwegianCompanies','ReallityMining'}%,'YahooMovies','Fraud','BookCrossing','TaFeng','Flickr'};
+datasets={'Fraud'}%{'MovieLens100k','PAKDD','NorwegianCompanies','ReallityMining'}%,'YahooMovies','Fraud','BookCrossing','TaFeng','Flickr'};
 vec=[0,1,2,3,4,5,6,7,8];
 for i=1:numel(datasets)
     coverage=0;

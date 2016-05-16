@@ -4,14 +4,16 @@ function [ featuresTr, featuresTe,coverage,nb_features ] = select_best_covering_
 %K=1000;
 tmp=featuresTr;
 selected_features=[];
+indices= ones(size(tmp,1),'uint16');
 [prev_tick, interval_time,start  ] = timer_start(60 );
 for i=1:K
     if (nnz(tmp))
-        cover=sum(tmp,1);
+        cover=sum(tmp(indices,:),1);
         [~,ind]=max(cover);
         selected_features=[selected_features,(ind(1))];
         vec=find(tmp(:,ind(1)));
-        tmp(vec,:)=[];
+        instances(vec)=0;
+       % tmp(vec,:)=[];
         
        % tmp(logical(tmp(:,ind(1))),:)=[]; 
     else

@@ -1,11 +1,12 @@
-function [ auc ] = logistic_regression( X,Y , mode )
+function [ auc,coverage,nb_feat ] = logistic_regression( X,Y , mode,K )
 
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %mode 0 - logistic regression on the regular feature set
 %mode 1 - logistic regression with all the pairs
 %mode 2 - logistic regression with selected pairs
-
+nb_feat=0;
+nb_f=[];
 X = double(logical(X));
 fold=mod([1:1:numel(Y)],10);
 c_opt=[0.01,0.1,1,10];
@@ -32,18 +33,17 @@ auc_te=[];
                 Xtr=Xind(tr,:);
                 Xval=Xind(val,:);
                 Ytr=Yind(tr);
-                Yval=Yind(val);
-                if (mode~=0)
-                    [featuresTr,featuresVal]=create_pairs(Xtr,Xval);   
-                    if (mode==1)
-                        Xtr=[Xtr,featuresTr];
-                        Xval=[Xval,featuresVal];
-                    elseif (mode==2) %select the best pairs
-                        [featuresTr,featuresVal]=select_best_covering_pairs(featuresTr,featuresVal);
-                        Xtr=[Xtr,featuresTr];
-                        Xval=[Xval,featuresVal];                  
-                    end                   
-                end
+                Yval=Yind(val);                       
+                if (mode==1)
+                    [featuresTr,featuresVal]=create_pairs(Xtr,Xval);
+                    Xtr=[Xtr,featuresTr];
+                    Xval=[Xval,featuresVal];
+                elseif (mode==2) %select the best pairs
+                    [featuresTr,featuresVal]=create_pairs_no_ones(Xtr,Xval);
+                    [featuresTr,featuresVal,coverage,nb_feat]=select_best_covering_pairs(featuresTr,featuresVal,K);
+                    Xtr=[Xtr,featuresTr];
+                    Xval=[Xval,featuresVal];                  
+                end                   
                 param=strcat({'-s 0  -c '},{num2str(c)});%-e 0.001
                 model = train(Ytr, Xtr, char(param)); %              
                 [predicted_label, accuracy, prob_estimates] = predict(Yval, Xval, model);
@@ -51,18 +51,18 @@ auc_te=[];
                 auc_val=[auc_val,auc_tmp];
              end
              auc_best_val(k)=sum(auc_val)/3;      
-        end
-        if (mode~=0)
-            [featuresInd,featuresTe]=create_pairs(Xind,Xte);   
-            if (mode==1)
-                Xind=[Xind,featuresInd];
-                Xte=[Xte,featuresTe];
-            elseif (mode==2) %select the best pairs
-                [featuresInd,featuresTe]=select_best_covering_pairs(featuresInd,featuresTe);
-                Xind=[Xind,featuresInd];
-                Xte=[Xte,featuresTe];                  
-            end                   
-        end
+        end   
+        if (mode==1)
+            [featuresInd,featuresTe]=create_pairs(Xind,Xte);
+            Xind=[Xind,featuresInd];
+            Xte=[Xte,featuresTe];
+        elseif (mode==2) %select the best pairs
+            [featuresInd,featuresTe]=create_pairs_no_ones(Xind,Xte);
+            [featuresInd,featuresTe,coverage,nb_feat]=select_best_covering_pairs(featuresInd,featuresTe,K);
+            Xind=[Xind,featuresInd];
+            Xte=[Xte,featuresTe]; 
+            nb_f=[nb_f,nb_feat];
+        end                   
         [~,y,~]=find(auc_best_val==max(auc_best_val));
         c= c_opt(y(1));%best performing c
         param=strcat({'-s 0  -c '},{num2str(c)});
@@ -72,6 +72,7 @@ auc_te=[];
         auc_te=[auc_te,auc_tmp1];    
     end
     auc=sum(auc_te)/10;
+    nb_f=nb_f/10;
 end
 
 
