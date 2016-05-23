@@ -4,7 +4,7 @@
 #PBS -N Matlab-test
 #PBS -l nodes=1:ppn=1
 #PBS -l walltime=05:00:00
-#PBS -l mem=20GB
+#PBS -l mem=30GB
 #PBS -M ms10007@nyu.edu
 #PBS -m e
 

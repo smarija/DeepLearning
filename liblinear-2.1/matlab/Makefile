@@ -1,7 +1,8 @@
-# This Makefile is used under Linux
+#
+#This Makefile is used under Linux
 
-MATLABDIR ?= /usr/local/matlab
-CXX ?= g++
+MATLABDIR ?= /share/apps/matlab/2015b
+CXX ?= gcc
 #CXX = g++-3.3
 CC ?= gcc
 CFLAGS = -Wall -Wconversion -O3 -fPIC -I$(MATLABDIR)/extern/include -I..
