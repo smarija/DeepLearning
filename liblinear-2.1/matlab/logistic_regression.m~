@@ -5,7 +5,7 @@ function [ auc_te,cov,nb_f ] = logistic_regression( X,Y , mode,K )
 %mode 0 - logistic regression on the regular feature set
 %mode 1 - logistic regression with all the pairs
 %mode 2 - logistic regression with selected pairs
-nb_f=[]; %avearge number of features
+nb_f=[]; %number of 
 cov=[]; % average coverage
 X = double(logical(X));
 fold=mod([1:1:numel(Y)],10);
