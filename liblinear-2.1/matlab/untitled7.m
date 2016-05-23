@@ -1,6 +1,6 @@
 cd('/home/ms10007/DeepLearning/liblinear-2.1/matlab')
 datasets={'TaFeng'}%{'MovieLens100k','PAKDD','NorwegianCompanies','ReallityMining'}%,'YahooMovies','Fraud','BookCrossing','TaFeng','Flickr'};
-vec=[0,1,2,3,4,5,6,7,8];
+vec=[0,1,2,3,4,5,6,7,8]; 
 for i=1:numel(datasets)
     count=1;
     path=strcat('/scratch/ms10007/Datasets/Datasets/',datasets{i});
