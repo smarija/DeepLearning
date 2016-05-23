@@ -21,5 +21,4 @@ for i=1:numel(datasets)
         count=count+1;
     end
     disp(datasets{i})
-    [auc1,auc2,auc3]
 end

@@ -22,4 +22,3 @@ for i=1:numel(datasets)
     end
 end
 disp(datasets{i})
-[auc1,auc2,auc3]

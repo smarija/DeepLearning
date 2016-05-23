@@ -1,5 +1,5 @@
 % mex -setup
 % % make
-[ auc,cov,nb_f ]=logistic_regression(matrix,label,2,1);
+[ auc,cov,nb_f ]=logistic_regression(matrix,label,1,1);
 
 
