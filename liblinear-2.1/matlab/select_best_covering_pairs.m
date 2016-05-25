@@ -10,18 +10,25 @@ for i=1:K
         cover=sum(tmp,1);
         [val,ind]=max(cover);
         if (val(1)==1)
-            ind=find(cover==1);
+            %ind=find(cover==1);
+            [row,ind,~]=find(tmp==1);
+            [~,ia,~] = unique(row);
+            ind=ind(ia);
             if(numel(ind)>=(K-i))
-                selected_features=[selected_features,ind(1:K-i+1)];%if all the remaining pairs cover only one instance, add the
-            %random first K-i pairs
+                selected_features=[selected_features,ind(1:K-i+1)'];%if all the remaining pairs cover only one instance, add the
+               % [vec,~,~]=find(tmp(:,ind)); %Check
+               % tmp(vec,:)=[];
+                %random first K-i pairs
                  break;
             else
-                selected_features=[selected_features,ind];
+                selected_features=[selected_features,ind'];
+               % [vec,~,~]=find(tmp(:,ind)); %Check
+               % tmp(vec,:)=[];
                 break;
             end
         end
         selected_features=[selected_features,(ind(1))];
-        vec=find(tmp(:,ind(1)));
+        [vec,~,~]=find(tmp(:,ind(1)));
         tmp(vec,:)=[];
         
        % tmp(logical(tmp(:,ind(1))),:)=[]; 
