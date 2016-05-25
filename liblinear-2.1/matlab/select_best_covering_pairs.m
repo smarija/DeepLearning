@@ -8,7 +8,18 @@ selected_features=[];
 for i=1:K
     if (nnz(tmp))
         cover=sum(tmp,1);
-        [~,ind]=max(cover);
+        [val,ind]=max(cover);
+        if (val(1)==1)
+            ind=find(cover==1);
+            if(numel(ind)>=(K-i))
+                selected_features=[selected_features,ind(1:K-i+1)];%if all the remaining pairs cover only one instance, add the
+            %random first K-i pairs
+                 break;
+            else
+                selected_features=[selected_features,ind];
+                break;
+            end
+        end
         selected_features=[selected_features,(ind(1))];
         vec=find(tmp(:,ind(1)));
         tmp(vec,:)=[];

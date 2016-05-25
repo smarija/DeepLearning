@@ -12,15 +12,15 @@ for i=1:numel(datasets)
 %    save(strcat(datasets{i},'LogIt1'),'auc1');
     [auc2,coverage,nb_feat]=logistic_regression(matrix,label,1);
     save(strcat(datasets{i},'LogIt2'),'auc2','coverage','nb_feat');
-    while(coverage<1)
-        K=10^vec(count);
-        [auc3,coverage,nb_feat]=logistic_regression(matrix,label,2,K);
-        nb_f=floor(sum(nb_feat)/10);
-        save(strcat(datasets{i},'LogIt3K',num2str(floor(nb_f))),'auc3','coverage','nb_feat');
-        if (nb_f<K)
-            break
-        end
-        count=count+1;
-    end
+%    while(coverage<1)
+%        K=10^vec(count);
+%        [auc3,coverage,nb_feat]=logistic_regression(matrix,label,2,K);
+%        nb_f=floor(sum(nb_feat)/10);
+%        save(strcat(datasets{i},'LogIt3K',num2str(floor(nb_f))),'auc3','coverage','nb_feat');
+%        if (nb_f<K)
+ %           break
+ %       end
+ %       count=count+1;
+ %   end
 end
 disp(datasets{i})
