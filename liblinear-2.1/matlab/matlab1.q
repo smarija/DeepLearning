@@ -9,4 +9,5 @@
 #PBS -m e
 
 cd /home/ms10007/DeepLearning/liblinear-2.1/matlab
-/share/apps/matlab/2015b/bin/matlab < untitled5.m
+/share/apps/matlab/2015b/bin/matlab < treshold_1.m
+

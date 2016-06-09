@@ -6,7 +6,12 @@ cutoff=size(Xtr,1);
 matrix=[Xtr;Xte];
 nb_feat_test=0;
 %create the features only from the training set
-tmp=triu(Xtr'*Xtr,1);
+if(mode==0)
+    tmp=triu(matrix'*matrix,1);%validation
+else
+    tmp=triu(Xtr'*Xtr,1);%test
+end
+
 [x,y,~]=find(tmp);
 clear tmp 
 %[x,y,~]=find(triu(Xtr'*Xtr,1));
@@ -32,11 +37,11 @@ for i=1:runs
 end
 
 % features=matrix(:,x).*matrix(:,y);
-featuresTr=features(1:cutoff,:);
+%featuresTr=features(1:cutoff,:);
 %% %NEW
 %select only top 10%
 if(mode==5)
-    best=floor(0.01 * size(features,2));
+    best=floor(0.1 * size(features,2));
     [no_need,ind]=sort(sum(featuresTr,1),'descend');
     ind=ind(1:best);
     featuresTr=features(1:cutoff,ind);
